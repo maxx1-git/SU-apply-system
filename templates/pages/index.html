@@ -9,6 +9,7 @@
   <meta name="description"
     content="الموقع الرسمي لوحدة السيارات السريعة — شرطة لوس سانتوس LSPD. المطاردات والاستجابة السريعة." />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="icon" type="image/x-icon" href="{% static 'img/lspd-icon.webp' %}" />
 </head>
 
 <body>
@@ -78,7 +79,7 @@
       </div>
     </div>
   </nav>
- {% if messages %}
+  {% if messages %}
   <div class="toast-container" data-toast>
     {% for message in messages %}
     <div class="toast toast--success show" data-toast>
