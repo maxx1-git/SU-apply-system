@@ -1,0 +1,419 @@
+{% load static %}
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وحدة السيارات السريعة — شرطة لوس سانتوس</title>
+  <meta name="description"
+    content="الموقع الرسمي لوحدة السيارات السريعة — شرطة لوس سانتوس LSPD. المطاردات والاستجابة السريعة." />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar__inner">
+      <a href="{% url 'index' %}" class="navbar__logo">
+        <div class="navbar__logo-icon">SU</div>
+        <span class="navbar__logo-text text-gradient">LSPD</span>
+      </a>
+
+      <ul class="navbar__links">
+        <li>
+          <a href="{% url 'index' %}#hero" class="navbar__link">الرئيسية</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#rules" class="navbar__link">القوانين</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#vehicles" class="navbar__link">المركبات</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#leadership" class="navbar__link">القيادة</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#members" class="navbar__link">الأعضاء</a>
+        </li>
+
+        <li class="navbar__cta-wrap">
+          <a href="{% url 'apply' %}" class="navbar__cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <line x1="19" y1="8" x2="19" y2="14" />
+              <line x1="22" y1="11" x2="16" y2="11" />
+            </svg>
+            التقديم
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="nav-toggle" aria-label="القائمة" aria-expanded="false">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="17" y2="6" />
+          <line x1="3" y1="10" x2="17" y2="10" />
+          <line x1="3" y1="14" x2="14" y2="14" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="navbar__mobile" id="nav-mobile">
+      <a href="{% url 'index' %}#hero">الرئيسية</a>
+      <a href="{% url 'index' %}#rules">القوانين</a>
+      <a href="{% url 'index' %}#vehicles">المركبات</a>
+      <a href="{% url 'index' %}#leadership">القيادة</a>
+      <a href="{% url 'index' %}#members">الأعضاء</a>
+      <div class="navbar__mobile-cta">
+        <a href="{% url 'apply' %}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <line x1="19" y1="8" x2="19" y2="14" />
+            <line x1="22" y1="11" x2="16" y2="11" />
+          </svg>
+          التقديم على الوحدة
+        </a>
+      </div>
+    </div>
+  </nav>
+ {% if messages %}
+  <div class="toast-container" data-toast>
+    {% for message in messages %}
+    <div class="toast toast--success show" data-toast>
+      <div class="toast__icon" data-toast>✅</div>
+
+      <div data-toast class="toast__content">
+        <div data-toast class="toast__title">نجاح</div>
+        <div data-toast class="toast__message">{{ message }}</div>
+      </div>
+
+      <button data-toast class="toast__close" onclick="this.parentElement.remove()">
+        ×
+      </button>
+
+      <div data-toast class="toast__progress"></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ── Hero ── -->
+  <section id="hero" class="hero">
+    <div class="hero__bg">
+      <img src="{% static 'img/hero-bg.jpg' %}" alt="لوس سانتوس" width="1920" height="1080" />
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge animate-fade-in">
+        <span class="hero__badge-dot animate-pulse"></span>
+        شرطة لوس سانتوس - LSPD
+      </div>
+      <h1 class="hero__title animate-fade-in-up">
+        <span class="text-gradient">وحدة السيارات</span><br />السريعة
+      </h1>
+      <p class="hero__desc animate-fade-in-up" style="animation-delay: 0.15s">
+        الوحدة المتخصصة في المطاردات عالية السرعة والاستجابة السريعة. نعمل على
+        حماية شوارع لوس سانتوس على مدار الساعة.
+      </p>
+      <div class="hero__actions animate-fade-in-up" style="animation-delay: 0.3s">
+        <a href="{% url 'apply' %}" class="btn btn--primary glow-sm">نموذج التقديم</a>
+        <a href="{% url 'index' %}#rules" class="btn btn--secondary">القوانين العامة</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Rules ── -->
+  <section id="rules" class="section-pad">
+    <div class="container--md">
+      <div class="section-header">
+        <h2 class="section-title">
+          القوانين العامة <span class="text-gradient">للوحدة</span>
+        </h2>
+        <p class="section-sub">
+          يجب على جميع أعضاء الوحدة الالتزام بهذه القوانين دون استثناء
+        </p>
+      </div>
+      <div class="rules__list">
+        <div class="rule reveal" style="transition-delay: 0s">
+          <span class="rule__num">1</span>
+          <p class="rule__text">
+            يتم إستخراج وحدة المطاردات السريعة فقط في حال وجود 4 عناصر شرطة
+            بالميدان ( تكون الوحدة هي رقم 5 في الميدان )
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.04s">
+          <span class="rule__num">2</span>
+          <p class="rule__text">
+            عدد وحدات المطاردة السريعة المسموح بها في الميدان هي وحدة واحدة
+            لكل 4 عناصر شرطة , بمعنى في حال وجود 8 عناصر شرطة يكون هناك وحدتين
+            في الميدان
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.08s">
+          <span class="rule__num">3</span>
+          <p class="rule__text">
+            وحدة المطاردات السريعة مصرح لها فقط بمطاردة السيارات فائقة السرعة
+            والسيارات المعدلة تعديلات غير قانونية
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.12s">
+          <span class="rule__num">4</span>
+          <p class="rule__text">
+            في حال الاستجابة لبلاغ به سيارة لا تستدعي وحدة المطاردات السريعة
+            يجب عليك انتظار وصول الدعم ثم الانسحاب من المطاردة
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.16s">
+          <span class="rule__num">5</span>
+          <p class="rule__text">
+            اي عنصر يقوم بقيادة وحدة المطاردات السريعة مسؤول عن المركبة
+            بالكامل. من الصيانة والتصليح
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.2s">
+          <span class="rule__num">6</span>
+          <p class="rule__text">
+            يجب على وحدة المطاردات السريعة قدر الإمكان التمركز في وسط المدينة
+            لسهولة الاستجابة لبلاغات الدعم
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.24s">
+          <span class="rule__num">7</span>
+          <p class="rule__text">
+            في حال وجود وحدتين تكون وحده جاهزه للاستجابه في وسط المدينة
+            والاخري جاهزة للاستجابات السريعه في بلاغات مدينة ساندي شور او
+            باليتو
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.28s">
+          <span class="rule__num">8</span>
+          <p class="rule__text">
+            يُمنع القيادة بسرعات عالية الا في حالة المطاردات او الاستجابة
+            السريعة للبلاغات , ويجب التأكد من تشغيل السفاتي والأنوار في حالة
+            السرعات العالية
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.32s">
+          <span class="rule__num">9</span>
+          <p class="rule__text">
+            يمنع منعا باتا على أي فرد شرطة غير حاصل على رخصة وحدة المطاردات
+            السريعة بقيادة المركبة إلا بإذن من رئاسة الوحدة
+          </p>
+        </div>
+
+        <div class="rule reveal" style="transition-delay: 0.36s">
+          <span class="rule__num">10</span>
+          <p class="rule__text">
+            الالتزام بتحديث البلاغات بشكل متكرر عن موقعك في المطاردة في حين ان
+            الواحدت المشاركة في المطاردة بعيده عنك
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Vehicles ── -->
+  <section id="vehicles" class="section-pad vehicles-bg">
+    <div class="container">
+      <div class="section-header__row">
+        <div>
+          <h2 class="section-title">
+            أسطول <span class="text-gradient">المركبات</span>
+          </h2>
+          <p class="section-sub">المركبات المعتمدة لعمليات الوحدة</p>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="الكل">الكل</button>
+          <button class="filter-btn" data-filter="مطاردة">مطاردة</button>
+          <button class="filter-btn" data-filter="دعم">دعم</button>
+          <button class="filter-btn" data-filter="دوريات">دوريات</button>
+        </div>
+      </div>
+      <div class="vehicles-grid" id="vehicles-grid">
+        <article class="v-card reveal" data-usage="مطاردة">
+          <div class="v-card__img">
+            <img src="{% static 'img/speed_dodge.png' %}" alt="دودج تشارجر" loading="lazy" />
+          </div>
+          <div class="v-card__body">
+            <h3 class="v-card__name">دودج تشارجر</h3>
+            <p class="v-card__desc">
+              سيارة المستوى الاول من وحدة المطاردات السريعة , سيارة متزنة من
+              حيث السرعة والقدرة على التحكم
+            </p>
+            <span class="v-card__tag tag--chase">مطاردة</span>
+          </div>
+        </article>
+
+        <article class="v-card reveal" data-usage="مطاردة">
+          <div class="v-card__img">
+            <img src="{% static 'img/speed_mustang.png' %}" alt="فورد موستنج" loading="lazy" />
+          </div>
+          <div class="v-card__body">
+            <h3 class="v-card__name">فورد موستنج</h3>
+            <p class="v-card__desc">
+              سيارة المستوى الثاني من وحدة المطاردات السريعة , وافضل مركبة من
+              حيث التحكم والانعطافات عالية السرعة
+            </p>
+            <span class="v-card__tag tag--chase">مطاردة</span>
+          </div>
+        </article>
+
+        <article class="v-card reveal" data-usage="مطاردة">
+          <div class="v-card__img">
+            <img src="{% static 'img/speed_camaro.jpg' %}" alt="كامارو" loading="lazy" />
+          </div>
+          <div class="v-card__body">
+            <h3 class="v-card__name">كامارو</h3>
+            <p class="v-card__desc">
+              سيارة المستوى الثالث من وحدة المطاردات السريعة , اعلى مركبة من
+              حيث السرعة والقوة الاعتراضيه
+            </p>
+            <span class="v-card__tag tag--chase">مطاردة</span>
+          </div>
+        </article>
+
+        <div class="v-card--soon reveal">
+          <span class="v-card--soon__icon">🔒</span>
+          <span class="v-card--soon__title">قريباً</span>
+          <span class="v-card--soon__sub">مركبة جديدة قيد الإضافة</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Leadership ── -->
+  <section id="leadership" class="section-pad">
+    <div class="container--md">
+      <div class="section-header--center">
+        <h2 class="section-title">
+          قيادة <span class="text-gradient">الوحدة</span>
+        </h2>
+        <p class="section-sub">الضباط المسؤولون عن إدارة وتشغيل الوحدة</p>
+      </div>
+      <div class="leaders-grid">
+        <article class="leader-card reveal">
+          <span class="leader-card__badge">القائد</span>
+          <div class="leader-card__inner">
+            <img src="{% static 'img/saqr.webp' %}" alt="صقر الرفاعي" class="leader-card__avatar" loading="lazy" />
+            <div>
+              <h3 class="leader-card__name">صقر الرفاعي</h3>
+              <span class="leader-card__rank">رئيس الوحدة</span>
+              <p class="leader-card__desc">
+                خبرة واسعة في قيادة عمليات المطاردة والتنسيق الميداني. يقود
+                الوحدة منذ تأسيسها
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="leader-card leader-card--offset reveal">
+          <div class="leader-card__inner">
+            <img src="{% static 'img/max_ai.png' %}" alt="ماكس رولينز" class="leader-card__avatar" loading="lazy" />
+            <div>
+              <h3 class="leader-card__name">ماكس رولينز</h3>
+              <span class="leader-card__rank">نائب رئيس الوحدة</span>
+              <p class="leader-card__desc">
+                متخصص في التدريب والتأهيل. يشرف على جاهزية الأفراد والمعدات
+                بشكل يومي
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Members ── -->
+  <section id="members" class="section-pad members-bg">
+    <div class="container">
+      <div class="section-header__row">
+        <div>
+          <h2 class="section-title">
+            الأعضاء <span class="text-gradient">المعتمدون</span>
+          </h2>
+          <p class="section-sub">أفراد الوحدة الحاصلون على الاعتماد الرسمي</p>
+        </div>
+        <div class="search-wrap">
+          <input type="text" id="member-search" class="search-input" placeholder="ابحث باسم العضو..." />
+          <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+        </div>
+      </div>
+      <div class="members-grid" id="members-grid">
+        <article class="member-card">
+          <div class="member-card__icon">⭐</div>
+          <div>
+            <p class="member-card__name">صقر الرفاعي</p>
+            <p class="member-card__rank">ملازم - رئيس الوحدة</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="member-card__icon">⭐</div>
+          <div>
+            <p class="member-card__name">ماكس رولينز</p>
+            <p class="member-card__rank">
+              أمين ممتاز ثاني - نائب رئيس الوحدة
+            </p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="member-card__icon">👤</div>
+          <div>
+            <p class="member-card__name">مازن هاني الدامي</p>
+            <p class="member-card__rank">أمين ممتاز اول</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="member-card__icon">👤</div>
+          <div>
+            <p class="member-card__name">محسن ممتاز</p>
+            <p class="member-card__rank">أمين ممتاز اول</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="member-card__icon">👤</div>
+          <div>
+            <p class="member-card__name">توني توماس</p>
+            <p class="member-card__rank">أمين ممتاز ثاني</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="member-card__icon">👤</div>
+          <div>
+            <p class="member-card__name">علي الطوخي</p>
+            <p class="member-card__rank">أمين ممتاز</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span>© 2026 وحدة السيارات السريعة — شرطة لوس سانتوس</span>
+    <span class="text-gradient" style="font-weight: 700">LSPD — Speed Unit</span>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

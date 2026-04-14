@@ -1,0 +1,190 @@
+{% load static %}
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التقديم — وحدة السيارات السريعة</title>
+  <meta name="description" content="نموذج التقديم على وحدة السيارات السريعة — شرطة لوس سانتوس LSPD" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <!-- ── Navbar ── -->
+  <nav class="navbar" role="navigation">
+    <div class="navbar__inner">
+      <a href="{% url 'index' %}" class="navbar__logo">
+        <div class="navbar__logo-icon">SU</div>
+        <span class="navbar__logo-text text-gradient">LSPD</span>
+      </a>
+
+      <ul class="navbar__links">
+        <li>
+          <a href="{% url 'index' %}#hero" class="navbar__link">الرئيسية</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#rules" class="navbar__link">القوانين</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#vehicles" class="navbar__link">المركبات</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#leadership" class="navbar__link">القيادة</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#members" class="navbar__link">الأعضاء</a>
+        </li>
+        <li class="navbar__cta-wrap">
+          <a href="{% url 'apply' %}" class="navbar__cta active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <line x1="19" y1="8" x2="19" y2="14" />
+              <line x1="22" y1="11" x2="16" y2="11" />
+            </svg>
+            التقديم
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="nav-toggle" aria-label="القائمة" aria-expanded="false">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="17" y2="6" />
+          <line x1="3" y1="10" x2="17" y2="10" />
+          <line x1="3" y1="14" x2="14" y2="14" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="navbar__mobile" id="nav-mobile">
+      <a href="{% url 'index' %}#hero">الرئيسية</a>
+      <a href="{% url 'index' %}#rules">القوانين</a>
+      <a href="{% url 'index' %}#vehicles">المركبات</a>
+      <a href="{% url 'index' %}#leadership">القيادة</a>
+      <a href="{% url 'index' %}#members">الأعضاء</a>
+      <div class="navbar__mobile-cta">
+        <a href="{% url 'apply' %}">التقديم على الوحدة</a>
+      </div>
+    </div>
+  </nav>
+   {% if messages %}
+  <div class="toast-container" data-toast>
+    {% for message in messages %}
+    <div class="toast toast--error show" data-toast>
+      <div class="toast__icon" data-toast>!</div>
+
+      <div data-toast class="toast__content">
+        <div data-toast class="toast__title">فشل</div>
+        <div data-toast class="toast__message">{{ message }}</div>
+      </div>
+
+      <button data-toast class="toast__close" onclick="this.parentElement.remove()">
+        ×
+      </button>
+
+      <div data-toast class="toast__progress"></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  <!-- ── Application Form ── -->
+  <main style="
+        padding-top: 7rem;
+        padding-bottom: 5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      ">
+    <div class="container--sm">
+      <div class="apply-header">
+        <div class="apply-badge animate-fade-in">
+          <span class="hero__badge-dot animate-pulse"></span>
+          نموذج التقديم
+        </div>
+        <h1 class="apply-title animate-fade-in-up">
+          <span class="text-gradient">التقديم على الوحدة</span>
+        </h1>
+        <p class="apply-desc animate-fade-in-up" style="animation-delay: 0.1s">
+          قم بتعبئة النموذج التالي بدقة. سيتم مراجعة طلبك من قبل قيادة وحدة
+          الدعم السريع.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form id="apply-form" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0s">
+          <label class="form-label" for="character_name">اسم الشخصية :</label>
+          <input class="form-input" type="text" id="character_name" name="character_name"
+            placeholder="اسم شخصيتك داخل الرول بلاي" required />
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0s">
+          <label class="form-label" for="discord_id">Discord ID : </label>
+          <input class="form-input" type="text" id="discord_id" name="discord_id"
+            placeholder="Your Discord ID" required />
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.05s">
+          <label class="form-label" for="rank_id">الرتبة والرقم التعريفي :</label>
+          <input class="form-input" type="text" id="rank_id" name="rank_id" placeholder="مثال : أمين اول | 455 "
+            required />
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.1s">
+          <label class="form-label" for="chase_handling">هل لديك القدرة في التعامل مع حالات المطاردة بسيارات الدعم
+            السريع
+            وانت تستلم البلاغات بشكل كامل عن الحالة ؟</label>
+          <textarea class="form-textarea" id="chase_handling" name="chase_handling" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.15s">
+          <label class="form-label" for="vehicle_experience">هل لديك خبرة في التعامل مع مركبات الدعم السريع ؟</label>
+          <textarea class="form-textarea" id="vehicle_experience" name="vehicle_experience" rows="4"
+            required></textarea>
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.2s">
+          <label class="form-label" for="apply_reasons">اذكر اسباب التقديم علي وحدة الدعم السريع ؟</label>
+          <textarea class="form-textarea" id="apply_reasons" name="apply_reasons" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.25s">
+          <label class="form-label" for="unit_tasks">ما هي مهام وحدة الدعم السريع ؟</label>
+          <textarea class="form-textarea" id="unit_tasks" name="unit_tasks" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.3s">
+          <label class="form-label" for="vehicle_deploy">متي يتيح اليك استخراج سيارة الدعم السريع ؟</label>
+          <textarea class="form-textarea" id="vehicle_deploy" name="vehicle_deploy" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group animate-fade-in-up" style="animation-delay: 0.35s">
+          <label class="form-label" for="chase_scenario">في حال كنت تطارد سيارة مدنية و لكن اقل من كفائة سيارة الدعم
+            السريع كيف ستتعامل ؟</label>
+          <textarea class="form-textarea" id="chase_scenario" name="chase_scenario" rows="4" required></textarea>
+        </div>
+
+        <div style="padding-top: 1rem" class="animate-fade-in-up" style="animation-delay: 0.4s">
+          <button type="submit" class="btn btn--primary glow-sm btn--full">
+            إرسال النموذج
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span>© 2026 وحدة السيارات السريعة — شرطة لوس سانتوس</span>
+    <span class="text-gradient" style="font-weight: 700">LSPD — Speed Unit</span>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
