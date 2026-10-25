@@ -109,7 +109,7 @@
     <div class="hero__content">
       <div class="hero__badge animate-fade-in">
         <span class="hero__badge-dot animate-pulse"></span>
-        شرطة لوس سانتوس - LSPD
+        Designed & Developed by Bola
       </div>
       <h1 class="hero__title animate-fade-in-up">
         <span class="text-gradient">وحدة السيارات</span><br />السريعة
@@ -140,14 +140,14 @@
         <div class="rule reveal" style="transition-delay: 0s">
   <span class="rule__num">1</span>
   <p class="rule__text">
-    يتم استخراج وحدة المطاردات السريعة فقط في حال وجود 4 عناصر شرطة على الأقل في الميدان، بحيث تكون الوحدة هي العنصر الخامس.
+    يتم استخراج وحدة المطاردات السريعة فقط في حال وجود 3 وحدات شرطة على الأقل في الميدان، بحيث تكون السبيد هي الوحدة الرابعة.
   </p>
 </div>
 
 <div class="rule reveal" style="transition-delay: 0.04s">
   <span class="rule__num">2</span>
   <p class="rule__text">
-    الحد الأقصى لوحدات المطاردات السريعة في الميدان هو وحدة واحدة لكل 4 عناصر شرطة، بمعنى أنه عند وجود 8 عناصر يُسمح بوجود وحدتين.
+    الحد الأقصى لوحدات المطاردات السريعة في الميدان هو وحدة واحدة لكل 3 وحدات شرطة، بمعنى أنه عند وجود 6 عناصر يُسمح بوجود وحدتين.
   </p>
 </div>
 
@@ -168,7 +168,7 @@
 <div class="rule reveal" style="transition-delay: 0.16s">
   <span class="rule__num">5</span>
   <p class="rule__text">
-    أي عنصر يقود مركبة المطاردات السريعة يتحمل المسؤولية الكاملة عنها، بما يشمل الصيانة والإصلاح.
+    يُمنع استخدام سيارة السبيد يونت كوحدة نقل , بإستثناء الحالات الطارئة او التوجيهات المباشرة من القيادة
   </p>
 </div>
 
@@ -244,19 +244,6 @@
         </div>
       </div>
       <div class="vehicles-grid" id="vehicles-grid">
-        <article class="v-card reveal" data-usage="مطاردة">
-          <div class="v-card__img">
-            <img src="{% static 'img/speed_dodge.png' %}" alt="دودج تشارجر" loading="lazy" />
-          </div>
-          <div class="v-card__body">
-            <h3 class="v-card__name">دودج تشارجر</h3>
-            <p class="v-card__desc">
-              سيارة المستوى الاول من وحدة المطاردات السريعة , سيارة متزنة من
-              حيث السرعة والقدرة على التحكم
-            </p>
-            <span class="v-card__tag tag--chase">مطاردة</span>
-          </div>
-        </article>
 
         <article class="v-card reveal" data-usage="مطاردة">
           <div class="v-card__img">
@@ -265,8 +252,7 @@
           <div class="v-card__body">
             <h3 class="v-card__name">فورد موستنج</h3>
             <p class="v-card__desc">
-              سيارة المستوى الثاني من وحدة المطاردات السريعة , وافضل مركبة من
-              حيث التحكم والانعطافات عالية السرعة
+              سيارة الفئة C من وحدة المطاردات السريعة
             </p>
             <span class="v-card__tag tag--chase">مطاردة</span>
           </div>
@@ -279,8 +265,7 @@
           <div class="v-card__body">
             <h3 class="v-card__name">كامارو</h3>
             <p class="v-card__desc">
-              سيارة المستوى الثالث من وحدة المطاردات السريعة , اعلى مركبة من
-              حيث السرعة والقوة الاعتراضيه
+              سيارة الفئة B من وحدة المطاردات السريعة
             </p>
             <span class="v-card__tag tag--chase">مطاردة</span>
           </div>
@@ -306,12 +291,12 @@
       </div>
       <div class="leaders-grid">
         <article class="leader-card reveal">
-          <span class="leader-card__badge">القائد</span>
+          <span class="leader-card__badge">المسؤول</span>
           <div class="leader-card__inner">
             <img src="{% static 'img/max_ai.png' %}" alt="صقر الرفاعي" class="leader-card__avatar" loading="lazy" />
             <div>
-              <h3 class="leader-card__name">ماكس رولينز</h3>
-              <span class="leader-card__rank">رئيس الوحدة</span>
+              <h3 class="leader-card__name">عصام النمر</h3>
+              <span class="leader-card__rank">مسؤول الوحدة</span>
               <p class="leader-card__desc">
                 متخصص في التدريب والتأهيل. يشرف على جاهزية الأفراد والمعدات
                 بشكل يومي
@@ -324,8 +309,8 @@
           <div class="leader-card__inner">
             <img src="{% static 'img/3li_to5y.png' %}" alt="" class="leader-card__avatar" loading="lazy" />
             <div>
-              <h3 class="leader-card__name">علي الطوخي</h3>
-              <span class="leader-card__rank">نائب رئيس الوحدة</span>
+              <h3 class="leader-card__name">ماكس رولينز</h3>
+              <span class="leader-card__rank">نائب مسؤول الوحدة</span>
               <p class="leader-card__desc">
                 مشرف عام على القطاع ومسؤول التدريبات والتقييمات العامة لأفراد
                 القطاع
@@ -357,89 +342,25 @@
         </div>
       </div>
       <div class="members-grid" id="members-grid">
-        <article class="member-card">
-          <div class="member-card__icon">⭐</div>
-          <div>
-            <p class="member-card__name">ماكس رولينز</p>
-            <p class="member-card__rank">ملازم - رئيس الوحدة - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span></p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">⭐</div>
-          <div>
-            <p class="member-card__name">علي الطوخي</p>
-            <p class="member-card__rank">
-              ملازم - نائب رئيس الوحدة - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span>
-            </p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">⭐</div>
-          <div>
-            <p class="member-card__name">صقر الرفاعي</p>
-            <p class="member-card__rank">
-              أمين ممتاز اول - رئيس الوحدة سابقا - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span>
-            </p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">⭐</div>
-          <div>
-            <p class="member-card__name">عمر الشريف</p>
-            <p class="member-card__rank">مقدم - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span></p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
-          <div>
-            <p class="member-card__name">مازن هاني الدامي</p>
-            <p class="member-card__rank">ملازم - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span></p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
-          <div>
-            <p class="member-card__name">توني توماس</p>
-            <p class="member-card__rank">ملازم - <span style="color: rgb(146, 7, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 3 )</span></p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
-          <div>
-            <p class="member-card__name">محسن ممتاز</p>
-            <p class="member-card__rank">ملازم - <span style="color: rgb(7, 63, 146); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 2 )</span></p>
-          </div>
-        </article>
 
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
+        {% for member in members %}
+                <article class="member-card">
+          <div style=" font-size: 1.5rem; font-family: 'Courier New', Courier, monospace; color: {{member.class_level.color}}; " class="member-card__icon">{{member.class_level.name}}</div>
           <div>
-            <p class="member-card__name">رامز محمد</p>
-            <p class="member-card__rank">ملازم - <span style="color: rgb(81, 146, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 1 )</span></p>
+            <p class="member-card__name">{{member.name}}</p>
+            <p class="member-card__rank">{{member.rank}} - {{member.position}} <span style="color: {{member.class_level.color}};"> ( Class {{member.class_level.name}} ) </span></p>
           </div>
         </article>
+        {% endfor %}
 
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
-          <div>
-            <p class="member-card__name">محمد مصطفى</p>
-            <p class="member-card__rank">ملازم - <span style="color: rgb(81, 146, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 1 )</span></p>
-          </div>
-        </article>
-        <article class="member-card">
-          <div class="member-card__icon">👤</div>
-          <div>
-            <p class="member-card__name">شيبوب الشايب</p>
-            <p class="member-card__rank">أمين اول - <span style="color: rgb(81, 146, 7); font-weight: 900; font-family: 'Lucida Sans Unicode';">( Level 1 )</span></p>
-          </div>
-        </article>
+
       </div>
     </div>
   </section>
 
   <!-- ── Footer ── -->
   <footer class="footer">
-    <span>© 2026 وحدة السيارات السريعة — شرطة لوس سانتوس</span>
+    <span>© 2026 وحدة السيارات السريعة — شرطة لاست تشانس</span>
     <span class="text-gradient" style="font-weight: 700">LSPD — Speed Unit</span>
   </footer>
 
