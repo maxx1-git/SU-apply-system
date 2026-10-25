@@ -44,7 +44,29 @@ INSTALLED_APPS = [
     'pages',
     'apply',
     'unit',
+
+
+    # AllAuth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.discord',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "discord": {
+        "APP": {
+            "client_id": "1538152162826256454",
+            "secret": "2jQqqEA_rhz62-iGQbiFsPpX3uO685II",
+            "key": "",
+        }
+    }
+}
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 
 
