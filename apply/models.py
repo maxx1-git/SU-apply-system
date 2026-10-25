@@ -1,9 +1,17 @@
+from django.conf import settings
 from django.db import models
 
-# Create your models here.
+
 class Application(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="applications",
+        null=True,
+        blank=True,
+    )
     character_name = models.CharField(max_length=100)
-    discord_id = models.CharField(max_length=100, unique=True)   
+    discord_id = models.CharField(max_length=100, unique=True)
     rank_id = models.CharField(max_length=100)
     chase_handling = models.TextField()
     vehicle_experience = models.TextField()
@@ -11,7 +19,6 @@ class Application(models.Model):
     unit_tasks = models.TextField()
     vehicle_deploy = models.TextField()
     chase_scenario = models.TextField()
-    
 
     created_at = models.DateTimeField(auto_now_add=True)
 

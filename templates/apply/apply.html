@@ -12,18 +12,10 @@
 </head>
 
 <body>
-  <!-- ── Navbar ── -->
   {% include "partials/navbar.html" with active_page="apply" %}
   {% include "partials/toasts.html" %}
 
-
-  <!-- ── Application Form ── -->
-  <main style="
-        padding-top: 7rem;
-        padding-bottom: 5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      ">
+  <main style="padding-top: 7rem; padding-bottom: 5rem; padding-left: 1rem; padding-right: 1rem;">
     <div class="container--sm">
       <div class="apply-header">
         <div class="apply-badge animate-fade-in">
@@ -34,44 +26,41 @@
           <span class="text-gradient">التقديم على الوحدة</span>
         </h1>
         <p class="apply-desc animate-fade-in-up" style="animation-delay: 0.1s">
-          قم بتعبئة النموذج التالي بدقة. سيتم مراجعة طلبك من قبل قيادة وحدة
-          الدعم السريع.
+          قم بتعبئة النموذج التالي بدقة. سيتم مراجعة طلبك من قبل قيادة وحدة الدعم السريع.
         </p>
       </div>
 
-      <!-- Form -->
       <form id="apply-form" method="POST">
         {% csrf_token %}
 
-        <div class="form-group animate-fade-in-up" style="animation-delay: 0s">
+        <div class="form-group animate-fade-in-up">
           <label class="form-label" for="character_name">اسم الشخصية :</label>
           <input class="form-input" type="text" id="character_name" name="character_name"
             placeholder="اسم شخصيتك داخل الرول بلاي" required />
         </div>
 
-        <div class="form-group animate-fade-in-up" style="animation-delay: 0s">
-          <label class="form-label" for="discord_id">Discord ID : </label>
-          <input class="form-input" type="text" id="discord_id" name="discord_id"
-            placeholder="Your Discord ID" required />
+        <div class="form-group animate-fade-in-up">
+          <label class="form-label">حساب Discord المرتبط :</label>
+          <input class="form-input" type="text"
+            value="{% if discord_username %}{{ discord_username }}{% else %}حسابك المرتبط{% endif %}"
+            readonly aria-readonly="true" />
+          <small>سيتم حفظ Discord ID تلقائيًا من الحساب الذي سجلت الدخول به.</small>
         </div>
 
         <div class="form-group animate-fade-in-up" style="animation-delay: 0.05s">
           <label class="form-label" for="rank_id">الرتبة والرقم التعريفي :</label>
-          <input class="form-input" type="text" id="rank_id" name="rank_id" placeholder="مثال : أمين اول | 455 "
-            required />
+          <input class="form-input" type="text" id="rank_id" name="rank_id"
+            placeholder="مثال : أمين اول | 455" required />
         </div>
 
         <div class="form-group animate-fade-in-up" style="animation-delay: 0.1s">
-          <label class="form-label" for="chase_handling">هل لديك القدرة في التعامل مع حالات المطاردة بسيارات الدعم
-            السريع
-            وانت تستلم البلاغات بشكل كامل عن الحالة ؟</label>
+          <label class="form-label" for="chase_handling">هل لديك القدرة في التعامل مع حالات المطاردة بسيارات الدعم السريع وانت تستلم البلاغات بشكل كامل عن الحالة ؟</label>
           <textarea class="form-textarea" id="chase_handling" name="chase_handling" rows="4" required></textarea>
         </div>
 
         <div class="form-group animate-fade-in-up" style="animation-delay: 0.15s">
           <label class="form-label" for="vehicle_experience">هل لديك خبرة في التعامل مع مركبات الدعم السريع ؟</label>
-          <textarea class="form-textarea" id="vehicle_experience" name="vehicle_experience" rows="4"
-            required></textarea>
+          <textarea class="form-textarea" id="vehicle_experience" name="vehicle_experience" rows="4" required></textarea>
         </div>
 
         <div class="form-group animate-fade-in-up" style="animation-delay: 0.2s">
@@ -90,12 +79,11 @@
         </div>
 
         <div class="form-group animate-fade-in-up" style="animation-delay: 0.35s">
-          <label class="form-label" for="chase_scenario">في حال كنت تطارد سيارة مدنية و لكن اقل من كفائة سيارة الدعم
-            السريع كيف ستتعامل ؟</label>
+          <label class="form-label" for="chase_scenario">في حال كنت تطارد سيارة مدنية و لكن اقل من كفائة سيارة الدعم السريع كيف ستتعامل ؟</label>
           <textarea class="form-textarea" id="chase_scenario" name="chase_scenario" rows="4" required></textarea>
         </div>
 
-        <div style="padding-top: 1rem" class="animate-fade-in-up" style="animation-delay: 0.4s">
+        <div style="padding-top: 1rem" class="animate-fade-in-up">
           <button type="submit" class="btn btn--primary glow-sm btn--full">
             إرسال النموذج
           </button>
@@ -104,7 +92,6 @@
     </div>
   </main>
 
-  <!-- ── Footer ── -->
   <footer class="footer">
     <span>© 2026 وحدة السيارات السريعة — شرطة لوس سانتوس</span>
     <span class="text-gradient" style="font-weight: 700">LSPD — Speed Unit</span>
