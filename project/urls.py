@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('su-admin-panel/', admin.site.urls),
     path('',include('pages.urls')),
     path('apply/', include('apply.urls')),
-    path('accounts/', include('allauth.urls')), 
+    # Discord is the only login method: send allauth login/signup pages straight to Discord
+    path('accounts/login/', RedirectView.as_view(pattern_name='discord_login', query_string=True)),
+    path('accounts/signup/', RedirectView.as_view(pattern_name='discord_login', query_string=True)),
+    path('accounts/', include('allauth.urls')),
 ]

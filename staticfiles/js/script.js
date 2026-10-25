@@ -2,6 +2,7 @@
   const navbar = document.querySelector(".navbar");
   const toggle = document.getElementById("nav-toggle");
   const mobile = document.getElementById("nav-mobile");
+  if (!navbar || !toggle || !mobile) return;
 
   window.addEventListener(
     "scroll",
@@ -50,6 +51,7 @@
 
 (function () {
   const input = document.getElementById("member-search");
+  if (!input) return;
   const cards = document.querySelectorAll("#members-grid .member-card");
   let emptyMsg = null;
 
@@ -90,35 +92,6 @@
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 })();
 
-// Navbar scroll & toggle
-(function () {
-  const navbar = document.querySelector(".navbar");
-  const toggle = document.getElementById("nav-toggle");
-  const mobile = document.getElementById("nav-mobile");
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      navbar.classList.toggle("scrolled", window.scrollY > 20);
-    }, {
-      passive: true
-    },
-  );
-
-  toggle.addEventListener("click", () => {
-    const isOpen = mobile.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", isOpen);
-    toggle.innerHTML = isOpen ?
-      '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="15" y2="15"/><line x1="5" y1="15" x2="15" y2="5"/></svg>' :
-      '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="14" y2="14"/></svg>';
-  });
-
-  mobile.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobile.classList.remove("open");
-    });
-  });
-})();
 // TOAST
 document.querySelectorAll("[data-toast]").forEach((toast) => {
   const duration = toast.dataset.duration || 4000;
@@ -133,3 +106,29 @@ document.querySelectorAll("[data-toast]").forEach((toast) => {
   }, duration);
 });
 
+// USER MENU (Discord account dropdown)
+(function () {
+  const btn = document.querySelector("[data-user-menu-toggle]");
+  const menu = document.querySelector("[data-user-menu-dropdown]");
+  if (!btn || !menu) return;
+
+  const setOpen = (open) => {
+    menu.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    menu.setAttribute("aria-hidden", String(!open));
+  };
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setOpen(!menu.classList.contains("open"));
+  });
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setOpen(false);
+      btn.focus();
+    }
+  });
+})();

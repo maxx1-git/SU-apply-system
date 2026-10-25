@@ -13,83 +13,8 @@
 
 <body>
   <!-- ── Navbar ── -->
-  <nav class="navbar" role="navigation">
-    <div class="navbar__inner">
-      <a href="{% url 'index' %}" class="navbar__logo">
-        <div class="navbar__logo-icon">SU</div>
-        <span class="navbar__logo-text text-gradient">LSPD</span>
-      </a>
-
-      <ul class="navbar__links">
-        <li>
-          <a href="{% url 'index' %}#hero" class="navbar__link">الرئيسية</a>
-        </li>
-        <li>
-          <a href="{% url 'index' %}#rules" class="navbar__link">القوانين</a>
-        </li>
-        <li>
-          <a href="{% url 'index' %}#vehicles" class="navbar__link">المركبات</a>
-        </li>
-        <li>
-          <a href="{% url 'index' %}#leadership" class="navbar__link">القيادة</a>
-        </li>
-        <li>
-          <a href="{% url 'index' %}#members" class="navbar__link">الأعضاء</a>
-        </li>
-        <li class="navbar__cta-wrap">
-          <a href="{% url 'apply' %}" class="navbar__cta active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <line x1="19" y1="8" x2="19" y2="14" />
-              <line x1="22" y1="11" x2="16" y2="11" />
-            </svg>
-            التقديم
-          </a>
-        </li>
-      </ul>
-
-      <button class="navbar__toggle" id="nav-toggle" aria-label="القائمة" aria-expanded="false">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="17" y2="6" />
-          <line x1="3" y1="10" x2="17" y2="10" />
-          <line x1="3" y1="14" x2="14" y2="14" />
-        </svg>
-      </button>
-    </div>
-
-    <div class="navbar__mobile" id="nav-mobile">
-      <a href="{% url 'index' %}#hero">الرئيسية</a>
-      <a href="{% url 'index' %}#rules">القوانين</a>
-      <a href="{% url 'index' %}#vehicles">المركبات</a>
-      <a href="{% url 'index' %}#leadership">القيادة</a>
-      <a href="{% url 'index' %}#members">الأعضاء</a>
-      <div class="navbar__mobile-cta">
-        <a href="{% url 'apply' %}">التقديم على الوحدة</a>
-      </div>
-    </div>
-  </nav>
-   {% if messages %}
-  <div class="toast-container" data-toast>
-    {% for message in messages %}
-    <div class="toast toast--error show" data-toast>
-      <div class="toast__icon" data-toast>!</div>
-
-      <div data-toast class="toast__content">
-        <div data-toast class="toast__title">فشل</div>
-        <div data-toast class="toast__message">{{ message }}</div>
-      </div>
-
-      <button data-toast class="toast__close" onclick="this.parentElement.remove()">
-        ×
-      </button>
-
-      <div data-toast class="toast__progress"></div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
+  {% include "partials/navbar.html" with active_page="apply" %}
+  {% include "partials/toasts.html" %}
 
 
   <!-- ── Application Form ── -->

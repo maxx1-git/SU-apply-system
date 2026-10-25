@@ -1,0 +1,1 @@
+{% if discord_account %}<img class="{{ cls }}" src="{{ discord_account.get_avatar_url }}" alt="" width="{{ size }}" height="{{ size }}" referrerpolicy="no-referrer">{% else %}<span class="{{ cls }} user-card__avatar--fallback" aria-hidden="true">{{ user.get_username|first|upper }}</span>{% endif %}

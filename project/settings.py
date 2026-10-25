@@ -65,15 +65,27 @@ SOCIALACCOUNT_PROVIDERS = {
             "secret": os.getenv("DISCORD_CLIENT_SECRET"),
             "key": "",
         },
+        # identify only: no email needed, so no signup form / email-verification step
+        "SCOPE": ["identify"],
     },
 }
 
+# Discord-only login: create the user automatically after authorization
 SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_LOGIN_ON_GET = True          # go straight to Discord, no intermediate confirm page
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_ADAPTER = "pages.adapters.SocialAdapter"
+ACCOUNT_ADAPTER = "pages.adapters.AccountAdapter"  # blocks local (password) signup
+ACCOUNT_SIGNUP_FIELDS = ["username*"]
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
-
+LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Behind a reverse proxy (Procfile/gunicorn): build https:// redirect URIs for Discord
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SITE_ID = 1
 

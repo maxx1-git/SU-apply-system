@@ -1,0 +1,18 @@
+{% if messages %}
+<div class="toast-container" data-toast>
+  {% for message in messages %}
+  <div class="toast toast--{% if message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}success{% endif %} show" data-toast>
+    <div class="toast__icon" data-toast>{% if message.tags == "error" %}!{% elif message.tags == "warning" %}⚠️{% else %}✅{% endif %}</div>
+
+    <div data-toast class="toast__content">
+      <div data-toast class="toast__title">{% if message.tags == "error" %}فشل{% elif message.tags == "warning" %}تنبيه{% else %}نجاح{% endif %}</div>
+      <div data-toast class="toast__message">{{ message }}</div>
+    </div>
+
+    <button data-toast class="toast__close" onclick="this.parentElement.remove()">×</button>
+
+    <div data-toast class="toast__progress"></div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

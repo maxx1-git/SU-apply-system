@@ -1,0 +1,103 @@
+{% load socialaccount %}
+{% comment %}
+  Shared navbar (logged in / logged out). Usage:
+  {% include "partials/navbar.html" with active_page="apply" %}
+{% endcomment %}
+{% if user.is_authenticated %}{% get_social_accounts user as accounts %}{% endif %}
+{% with discord_account=accounts.discord.0 %}
+<nav class="navbar" role="navigation">
+  <div class="navbar__inner">
+    <a href="{% url 'index' %}" class="navbar__logo">
+      <div class="navbar__logo-icon">SU</div>
+      <span class="navbar__logo-text text-gradient">LSPD</span>
+    </a>
+
+    <ul class="navbar__links">
+      <li><a href="{% url 'index' %}#hero" class="navbar__link">الرئيسية</a></li>
+      <li><a href="{% url 'index' %}#rules" class="navbar__link">القوانين</a></li>
+      <li><a href="{% url 'index' %}#vehicles" class="navbar__link">المركبات</a></li>
+      <li><a href="{% url 'index' %}#leadership" class="navbar__link">القيادة</a></li>
+      <li><a href="{% url 'index' %}#members" class="navbar__link">الأعضاء</a></li>
+
+      <li class="navbar__cta-wrap">
+        <a href="{% url 'apply' %}" class="navbar__cta{% if active_page == 'apply' %} active{% endif %}">
+          {% include "partials/apply_icon.html" %}
+          التقديم
+        </a>
+      </li>
+
+      <li class="navbar__auth navbar__cta-wrap">
+        {% if user.is_authenticated %}
+        <div class="user-menu">
+          <button type="button" class="user-card" id="user-menu-button"
+                  data-user-menu-toggle aria-haspopup="true" aria-expanded="false"
+                  aria-controls="user-menu-dropdown">
+            {% include "partials/user_avatar.html" with cls="user-card__avatar" size=28 %}
+            <span class="user-card__name">{% firstof discord_account.extra_data.global_name user.get_full_name user.get_username %}</span>
+            <svg class="user-card__chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+              <path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="user-dropdown" id="user-menu-dropdown" role="menu"
+               aria-labelledby="user-menu-button" data-user-menu-dropdown aria-hidden="true">
+            <div class="user-dropdown__header">
+              {% include "partials/user_avatar.html" with cls="user-dropdown__avatar" size=36 %}
+              <span class="user-dropdown__name">{% firstof discord_account.extra_data.global_name user.get_full_name user.get_username %}</span>
+            </div>
+            <form method="post" action="{% url 'account_logout' %}" class="user-dropdown__logout-form">
+              {% csrf_token %}
+              <button type="submit" class="user-dropdown__logout" role="menuitem">تسجيل خروج</button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <a class="btn btn--discord" href="{% provider_login_url 'discord' process='login' next=request.get_full_path %}">
+          تسجيل دخول
+          {% include "partials/discord_icon.html" %}
+        </a>
+        {% endif %}
+      </li>
+    </ul>
+
+    <button class="navbar__toggle" id="nav-toggle" aria-label="القائمة" aria-expanded="false">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="17" y2="6" />
+        <line x1="3" y1="10" x2="17" y2="10" />
+        <line x1="3" y1="14" x2="14" y2="14" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="navbar__mobile" id="nav-mobile">
+    <a href="{% url 'index' %}#hero">الرئيسية</a>
+    <a href="{% url 'index' %}#rules">القوانين</a>
+    <a href="{% url 'index' %}#vehicles">المركبات</a>
+    <a href="{% url 'index' %}#leadership">القيادة</a>
+    <a href="{% url 'index' %}#members">الأعضاء</a>
+    <div class="navbar__mobile-cta">
+      <a href="{% url 'apply' %}">
+        {% include "partials/apply_icon.html" with size=14 %}
+        التقديم على الوحدة
+      </a>
+    </div>
+    <div class="navbar__mobile-auth">
+      {% if user.is_authenticated %}
+      <div class="user-dropdown__header">
+        {% include "partials/user_avatar.html" with cls="user-dropdown__avatar" size=36 %}
+        <span class="user-dropdown__name">{% firstof discord_account.extra_data.global_name user.get_full_name user.get_username %}</span>
+      </div>
+      <form method="post" action="{% url 'account_logout' %}" class="user-dropdown__logout-form">
+        {% csrf_token %}
+        <button type="submit" class="user-dropdown__logout">تسجيل خروج</button>
+      </form>
+      {% else %}
+      <a class="btn btn--discord" href="{% provider_login_url 'discord' process='login' next=request.get_full_path %}">
+        تسجيل دخول
+        {% include "partials/discord_icon.html" %}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+{% endwith %}
