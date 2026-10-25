@@ -1,4 +1,6 @@
 {% load static %}
+{% load socialaccount %}
+{% load account %}
 <!doctype html>
 <html lang="ar" dir="rtl">
 
@@ -48,6 +50,65 @@
             التقديم
           </a>
         </li>
+
+<li class="navbar__cta-wrap">
+  {% if user.is_authenticated %}
+    {% get_social_accounts user as accounts %}
+    {% with discord_account=accounts.discord.0 %}
+    <div class="user-menu">
+      <button type="button" class="user-card" id="user-menu-button"
+              data-user-menu-toggle aria-haspopup="true" aria-expanded="false"
+              aria-controls="user-menu-dropdown">
+        {% if discord_account %}
+          <img class="user-card__avatar" src="{{ discord_account.get_avatar_url }}"
+               alt="" width="28" height="28" referrerpolicy="no-referrer">
+        {% else %}
+          <span class="user-card__avatar user-card__avatar--fallback" aria-hidden="true">
+            {{ user.get_username|first|upper }}
+          </span>
+        {% endif %}
+        <span class="user-card__name">
+          {% firstof discord_account.extra_data.global_name user.get_full_name user.get_username %}
+        </span>
+        <svg class="user-card__chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="user-dropdown" id="user-menu-dropdown" role="menu"
+           aria-labelledby="user-menu-button" data-user-menu-dropdown aria-hidden="true">
+        <div class="user-dropdown__header">
+          {% if discord_account %}
+            <img class="user-dropdown__avatar" src="{{ discord_account.get_avatar_url }}"
+                 alt="" width="36" height="36" referrerpolicy="no-referrer">
+          {% else %}
+            <span class="user-dropdown__avatar user-card__avatar--fallback" aria-hidden="true">
+              {{ user.get_username|first|upper }}
+            </span>
+          {% endif %}
+          <span class="user-dropdown__name">
+            {% firstof discord_account.extra_data.global_name user.get_full_name user.get_username %}
+          </span>
+        </div>
+        <form method="post" action="{% url 'account_logout' %}" class="user-dropdown__logout-form">
+          {% csrf_token %}
+          <button type="submit" class="user-dropdown__logout" role="menuitem">تسجيل خروج</button>
+        </form>
+      </div>
+    </div>
+    {% endwith %}
+  {% else %}
+    <a class="btn btn--discord" href="{% provider_login_url 'discord' process='login' %}">
+      تسجيل دخول
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+      </svg>
+    </a>
+  {% endif %}
+</li>
+
       </ul>
 
       <button class="navbar__toggle" id="nav-toggle" aria-label="القائمة" aria-expanded="false">

@@ -133,9 +133,3 @@ document.querySelectorAll("[data-toast]").forEach((toast) => {
   }, duration);
 });
 
-
-
-
-
-
-

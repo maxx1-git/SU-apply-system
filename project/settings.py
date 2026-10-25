@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gp=vlv4bns@4=emgea&0*thjilmpu)(38!o%804svh#@vc-ef+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,6 +32,10 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Application definition
+from dotenv import load_dotenv
+
+load_dotenv(BASE_DIR / ".env")
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'pages',
     'apply',
@@ -56,32 +61,36 @@ INSTALLED_APPS = [
 SOCIALACCOUNT_PROVIDERS = {
     "discord": {
         "APP": {
-            "client_id": "1538152162826256454",
-            "secret": "2jQqqEA_rhz62-iGQbiFsPpX3uO685II",
+            "client_id": os.getenv("DISCORD_CLIENT_ID"),
+            "secret": os.getenv("DISCORD_CLIENT_SECRET"),
             "key": "",
-        }
-    }
+        },
+    },
 }
+
 SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 
 ]
+
+
 
 ROOT_URLCONF = 'project.urls'
 
@@ -102,6 +111,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases

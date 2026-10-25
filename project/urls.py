@@ -21,4 +21,5 @@ urlpatterns = [
     path('su-admin-panel/', admin.site.urls),
     path('',include('pages.urls')),
     path('apply/', include('apply.urls')),
+    path('accounts/', include('allauth.urls')), 
 ]
